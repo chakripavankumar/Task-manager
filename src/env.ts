@@ -1,4 +1,5 @@
 import { z } from "zod";
+import 'dotenv/config'
  
 const envSchema  = z.object({
     APP_NAME: z.string().min(1, { message: "App_Name is required" }),
