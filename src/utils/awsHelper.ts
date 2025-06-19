@@ -11,11 +11,12 @@ export const uploadTos3 = async (filename: string, filepath: string) => {
       Key: `uploads/${filename}`,
       Body: await readFile(`${filepath}`),
     });
-    const responce = await myS3Client.send(command);
+    const response = await myS3Client.send(command);
     const link = `https://${env.AWS_BUCKETNAME}.s3-${env.AWS_BUCKETREGION}.amazonaws.com/uploads/${filename}`;
 
     await unlink(filepath);
-    return { responce, link };
+
+    return { response, link };
   } catch (error) {
     const result = (error as Error).message;
     throw new ApiError(500, result);

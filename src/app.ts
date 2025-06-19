@@ -9,9 +9,17 @@ app.use(express.static("src/public"));
 app.use(cookieParser());
 
 import { router as HealthCheckRouter } from "@/routes/healthCheck";
-import { router as UserRouter } from "@/routes/auth";
+import { router as userRouter } from "@/routes/auth";
+import { router as projectRouter } from "@/routes/project";
+import { router as taskRouter } from "@/routes/task";
+import { router as noteRouter } from "@/routes/note";
+import { errorHandler } from "./middleware/errorHandler";
 
 app.use("/api/v1/healthcheck", HealthCheckRouter);
-app.use("/api/v1/user", UserRouter);
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/project", projectRouter);
+app.use("/api/v1/task", taskRouter);
+app.use("/api/v1/note", noteRouter);
 
+app.use(errorHandler);
 export default app;
