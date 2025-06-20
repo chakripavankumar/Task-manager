@@ -30,7 +30,6 @@ export const createProject = asyncHandler(
 );
 export const getProjects = asyncHandler(async (req: Request, res: Response) => {
   const user_id = req.user!._id;
-  // const projects = await Project.find({ createdBy: user_id }).select("-__v")
   const projects = await Project.aggregate([
     {
       $match: {
@@ -407,7 +406,7 @@ export const addMemberToProject = asyncHandler(
     const { role } = req.body;
     const userRole = await getRole(req.user!._id, projectId);
     if (userRole === UserRolesEnum.MEMBER || userRole === "NoPermission") {
-      throw new ApiError(403, "UnAuthorized request");
+      throw new ApiError(403, "UnAuthorized requestu");
     }
     if (!projectId) throw new ApiError(422, "Please provide projectId");
     if (!memberId) throw new ApiError(422, "Please provide memberId");

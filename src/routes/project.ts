@@ -8,10 +8,10 @@ import { Router } from "express";
 export const router: Router = Router()
 
 router.use(isAuth)
-router.post("/", validate(projectSchema), isAuthorized, createProject)
+router.post("/", validate(projectSchema), createProject)
 router.get("/", getProjects)
 router.get("/:projectId", getProjectById)
-router.patch("/:projectId", validate(updateProjectSchema), isAuthorized, updateProject)
+router.patch("/:projectId", validate(updateProjectSchema), updateProject)
 router.delete("/:projectId", isAuth, deleteProject)
 router.post("/add-member/:projectId/:memberId", validate(memberRoleSchema), addMemberToProject)
 router.get("/members/:projectId", getProjectMembers)

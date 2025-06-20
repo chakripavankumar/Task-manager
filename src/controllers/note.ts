@@ -69,7 +69,6 @@ export const updateNote = asyncHandler(async (req: Request, res: Response) => {
     }),
   );
 });
-
 export const deleteNote = asyncHandler(async (req: Request, res: Response) => {
   const { noteId } = req.params;
   const deleteNo = await ProjectNote.findByIdAndDelete({

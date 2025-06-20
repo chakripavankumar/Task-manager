@@ -1,13 +1,11 @@
 import { env } from "@/env";
 import Mailgen from "mailgen";
 import nodemailer from "nodemailer";
-
 type optionType = {
   email: string;
   subject: string;
   mailGenContent: Mailgen.Content;
 };
-
 export const sendMail = async (options: optionType) => {
   const mailGenrator = new Mailgen({
     theme: "default",
@@ -16,10 +14,8 @@ export const sendMail = async (options: optionType) => {
       link: "https://mailgen.js/",
     },
   });
-
   var emailText = mailGenrator.generatePlaintext(options.mailGenContent);
   var emailHTML = mailGenrator.generate(options.mailGenContent);
-
   const transporter = nodemailer.createTransport({
     host: env.MAILTRAP_HOST_NAME,
     port: 2525,
@@ -36,7 +32,6 @@ export const sendMail = async (options: optionType) => {
     text: emailText,
     html: emailHTML,
   };
-
   try {
     await transporter.sendMail(mail);
     return true;
